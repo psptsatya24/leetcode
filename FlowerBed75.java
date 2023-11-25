@@ -2,26 +2,33 @@ package org.leetcode;
 
 public class FlowerBed75 {
 
-    private boolean  canPlaceFlowers(int[] flowerBed , int i){
+      private boolean  canPlaceFlowers(int[] flowerbed , int n){
         int counter = 0;
-        //if flowerBed is even array
+        int currentPointer = 0;
+        int prevPointer =0;
+        int nextPointer = 0;
+         for (int j = 0; j <= flowerbed.length-1 ; j++) {
+               currentPointer = flowerbed[j];
+               if (j> 0){
+                   prevPointer = flowerbed[j-1];
+               }
+               else
+                   prevPointer = 0;
 
-            for (int j = 0; j < flowerBed.length - 1; j++) {
-                if (flowerBed[j] == 0 && flowerBed[j + 1] == 0) {
-                    counter++;
-                    j++;
-                }
-            }
-            //A special condition when flower bed is of odd length.
-            if (flowerBed.length%2 !=0 && flowerBed[flowerBed.length-1] ==0 && flowerBed[flowerBed.length -2] ==0)
-                counter++;
+               //nextPointer = flowerbed[j+1];
+               if (j+1 == flowerbed.length)
+                   nextPointer=0;
+               else nextPointer = flowerbed[j+1];
 
-        if(counter>=i) return true;
+               if( prevPointer ==0 && nextPointer == 0 && currentPointer !=1) {
+                   counter++;
+                   flowerbed[j]=1;
+               }
+        }
+
+        if(counter>=n) return true;
         else return false;
-
-       // return true;
     }
-    //1.22 Pm
     public static void main(String args[]){
         int[] flowerBedArray = {0,0,0 };
 
